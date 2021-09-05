@@ -1,6 +1,6 @@
 'use strict';
 
-const guessedLettersElement = document.querySelector('.guessed-letters'); //guessed letters list
+const guessedLettersContainer = document.querySelector('.guessed-letters'); //guessed letters list
 const btnGuess = document.querySelector('.guess'); //'Guess!' button
 const letterInput = document.querySelector('.letter'); //Input box for letter guesses
 const wordInProgress = document.querySelector('.word-in-progress');
@@ -72,15 +72,69 @@ const makeGuess = userGuess => {
     message.classList.add('message--error');
   } else {
     guessedLetters.push(userGuess);
+    showGuessedLetters(userGuess);
+    updateWord(guessedLetters);
     console.log(guessedLetters);
+  }
+};
+
+//Function Notes
+//1. Create list item for each array item in the guessedLetters array
+//2. Set the text content of list itemt o the userGuess
+//3. Append that list item to the guessedLettersContainer
+const showGuessedLetters = userGuess => {
+  //guessedLettersContainer.innerHTML = '';
+  let li = document.createElement('li');
+  guessedLetters.forEach(userGuess => {
+    li.textContent = userGuess;
+    guessedLettersContainer.append(li);
+    console.log(guessedLettersContainer);
+  });
+};
+
+//Function Notes
+//1. Pass the function a param of the guessed letters array
+//2. Declare variable to change the word to upper case
+//3. Declare variable to split wordUpper into an array
+//4. Declare an empty arraty to hold the word with revealed letters
+//5. For each letter in the wordArray:
+//5a. If letter is correctly guessed, push the letter to the revealWordInProgress array
+//5b. If the letter is incorrectly guessed, push '●' to the revealWordInProgress array
+//6. Change text content of wordInProgress to revealWordInProgress as a string
+//7. Call the checkPlayerWin function with a param of wordUpper
+
+const updateWord = guessedLetters => {
+  const wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split('');
+  console.log(wordArray);
+  const revealWordInProgress = [];
+
+  for (let letter of wordArray) {
+    if (guessedLetters.includes(letter)) {
+      revealWordInProgress.push(letter);
+    } else {
+      revealWordInProgress.push('●');
+    }
+  }
+  wordInProgress.textContent = revealWordInProgress.join('');
+  checkPlayerWin(wordUpper);
+};
+
+//Function Notes
+//1. Add conditional block: If the text content of the wordInProgress is the same type and value as the wordUpper param:
+//2. Add class of .win to message
+//3. Modify the innerHTML of message
+const checkPlayerWin = wordUpper => {
+  if (wordInProgress.textContent === wordUpper) {
+    message.classList.add('win');
+    message.innerHTML = `<p class="highlight" class="message">You guessed correct the word! Congrats!</p>`;
   }
 };
 
 concealWord(word);
 
 /* Commit notes:
-- Create a Function to Check Player’s Input
-- Validate Input in the Button Event Handler
-- Add a New Global Variable for Player Guesses
-- Create a Function to Capture Input
+- Create a Function to Show the Guessed Letters
+- Create a Function to Update the Word in Progress
+- Create a Function to Check If the Player Won
  */
