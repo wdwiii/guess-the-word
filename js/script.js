@@ -2,14 +2,15 @@
 
 const guessedLettersContainer = document.querySelector('.guessed-letters'); //guessed letters list
 const btnGuess = document.querySelector('.guess'); //'Guess!' button
+const btnPlayAgain = document.querySelector('.play-again'); // Button to restart game
 const letterInput = document.querySelector('.letter'); //Input box for letter guesses
 const wordInProgress = document.querySelector('.word-in-progress');
-const remainingGuesses = document.querySelector('span');
+const remainingGuesses = document.querySelector('.remaining');
 const message = document.querySelector('.message'); //message will appear when the player guesses a letter
-const btnPlayAgain = document.querySelector('.play-again'); // Button to restart game
+const picture = document.querySelector('.picture'); //Div that contains photo that will appear when the game is over
 let word = 'allotment'; //Word that needs to be guessed (default)
-const guessedLetters = []; //Letters that have been input by the user
-let remainingGuessesNumber = 9;
+let guessedLetters = []; //Letters that have been input by the user
+let remainingGuessesNumber = 8;
 let guessesSpan = document.querySelector('span');
 guessesSpan.textContent = `${remainingGuessesNumber} guesses`;
 
@@ -58,7 +59,6 @@ const concealWord = word => {
 btnGuess.addEventListener('click', e => {
   e.preventDefault();
   const userGuess = letterInput.value;
-  console.log(userGuess);
   letterInput.value = '';
   validateInput(userGuess);
   if (validateInput(userGuess)) makeGuess(userGuess);
@@ -79,7 +79,6 @@ const validateInput = userGuess => {
     message.classList.add('message--error');
     message.textContent = `Please enter a letter from A - Z.`;
   } else {
-    //message.classList.remove('message--error');
     message.textContent = '';
     return userGuess;
   }
@@ -100,7 +99,6 @@ const makeGuess = userGuess => {
     showGuessedLetters(userGuess);
     countGuesses(userGuess);
     updateWord(guessedLetters);
-    console.log(guessedLetters);
   }
 };
 
@@ -114,7 +112,6 @@ const showGuessedLetters = userGuess => {
   guessedLetters.forEach(userGuess => {
     li.textContent = userGuess;
     guessedLettersContainer.append(li);
-    console.log(guessedLettersContainer);
   });
 };
 
@@ -132,7 +129,6 @@ const showGuessedLetters = userGuess => {
 const updateWord = guessedLetters => {
   const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split('');
-  console.log(wordArray);
   const revealWordInProgress = [];
 
   for (let letter of wordArray) {
@@ -166,10 +162,9 @@ const countGuesses = guess => {
       guessesSpan.textContent = `1 guess`;
     } else if (remainingGuessesNumber === 0) {
       const remainingMessage = document.querySelector('.remaining');
-      remainingMessage.innerHTML =
-        `You ran out of guesses<br>You lose`.toUpperCase();
-      remainingMessage.classList.add('message--error');
-      remainingMessage.style.textAlign = 'center';
+      remainingMessage.classList.add('hide');
+      startOver();
+      picture.style.backgroundImage = 'url("img/not-a-winner.png")';
     }
   } else {
     message.textContent = `The word does include the letter ${guess}`;
@@ -183,14 +178,45 @@ const countGuesses = guess => {
 const checkPlayerWin = wordUpper => {
   if (wordInProgress.textContent === wordUpper) {
     message.classList.add('win');
-    message.innerHTML = `<p class="highlight" class="message">You guessed correct the word! Congrats!</p>`;
+    message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    remainingGuesses.classList.add('hide');
+    startOver();
+    picture.style.backgroundImage = 'url("img/trophy.png")';
   }
 };
+
+//Function Notes
+//1. Hide the .guessed-letters ul, 'type one letter' label, input box and guess button
+//2. Display 'play again' button and picture
+const startOver = () => {
+  guessedLettersContainer.classList.add('hide');
+  letterInput.classList.add('hide');
+  document.querySelector('label').classList.add('hide');
+  btnGuess.classList.add('hide');
+  btnPlayAgain.classList.remove('hide');
+  picture.classList.remove('hide');
+};
+
+btnPlayAgain.addEventListener('click', function () {
+  message.classList.remove('win');
+  message.innerHTML = '';
+  guessedLettersContainer.classList.remove('hide');
+  guessedLettersContainer.innerHTML = '';
+  letterInput.classList.remove('hide');
+  document.querySelector('label').classList.remove('hide');
+  btnGuess.classList.remove('hide');
+  btnPlayAgain.classList.add('hide');
+  picture.classList.add('hide');
+  remainingGuesses.classList.remove('hide');
+  guessedLetters = [];
+  remainingGuessesNumber = 8;
+  guessesSpan.textContent = `${remainingGuessesNumber} guesses`;
+  getWord();
+});
 
 concealWord(word);
 
 /* Commit notes:
-- Declare a Global Variable for the Number of Guesses
-- Create a Function to Count Guesses Remaining
-- Add an Async Function
+- Create a Function to Hide and Show Elements
+- Add a Click Event to the Play Again Button
  */
