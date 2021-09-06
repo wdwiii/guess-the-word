@@ -140,6 +140,14 @@ input:focus {
   color: white;
 }
 
+.picture {
+  height: 300px;
+  width: 300px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* animatied background */
 .win {
   padding: 0 1em;
