@@ -7,8 +7,33 @@ const wordInProgress = document.querySelector('.word-in-progress');
 const remainingGuesses = document.querySelector('span');
 const message = document.querySelector('.message'); //message will appear when the player guesses a letter
 const btnPlayAgain = document.querySelector('.play-again'); // Button to restart game
-let word = 'magnolia'; //Word that needs to be guessed
+let word = 'allotment'; //Word that needs to be guessed (default)
 const guessedLetters = []; //Letters that have been input by the user
+let remainingGuessesNumber = 9;
+let guessesSpan = document.querySelector('span');
+guessesSpan.textContent = `${remainingGuessesNumber} guesses`;
+
+//Function Notes
+//1. Declare async function for fetching data
+//2. Fetch data from a file at provided address
+//3. Split txt data by the newline delimiter ('\n')
+//4.Delcare variable for parsed data
+//5. Declare variable to generate random number
+//6. Reassgin word var to be a word from wordsArray at a random index
+//6a. Remove any whitespace from the word by using the .trim() method
+//7. Call the concealWord function with a value of word
+const getWord = async function () {
+  const wordData = await fetch(
+    'https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt'
+  );
+  const words = await wordData.text();
+  const wordsArray = words.split('\n');
+  const randomIndex = Math.floor(Math.random() * wordsArray.length);
+  word = wordsArray[randomIndex].trim();
+  console.log(word);
+  concealWord(word);
+};
+getWord();
 
 //Function Notes
 //1. Create function with a param of 'word'
@@ -73,6 +98,7 @@ const makeGuess = userGuess => {
   } else {
     guessedLetters.push(userGuess);
     showGuessedLetters(userGuess);
+    countGuesses(userGuess);
     updateWord(guessedLetters);
     console.log(guessedLetters);
   }
@@ -121,6 +147,36 @@ const updateWord = guessedLetters => {
 };
 
 //Function Notes
+//1. Remove the red text styling fprm meessage
+//2. Change the word to uppercase
+//3. Declare a variable will split the word into an array of letters
+//4. Conditionals:
+//4a. If guess is incorrect, display message and decrease remaingGuessNumber by 1, update the text content of the span
+//4b. If guesses remaining is equal to 1, display a message
+//4c. If guesses remaining is equal to 0, display a 'you lose' message
+const countGuesses = guess => {
+  message.classList.remove('message--error');
+  word = word.toUpperCase();
+  let wordArray = word.split('');
+  if (!wordArray.includes(guess)) {
+    message.textContent = `The letter ${guess} is NOT apart of the word.`;
+    remainingGuessesNumber--;
+    guessesSpan.textContent = `${remainingGuessesNumber} guesses`;
+    if (remainingGuessesNumber === 1) {
+      guessesSpan.textContent = `1 guess`;
+    } else if (remainingGuessesNumber === 0) {
+      const remainingMessage = document.querySelector('.remaining');
+      remainingMessage.innerHTML =
+        `You ran out of guesses<br>You lose`.toUpperCase();
+      remainingMessage.classList.add('message--error');
+      remainingMessage.style.textAlign = 'center';
+    }
+  } else {
+    message.textContent = `The word does include the letter ${guess}`;
+  }
+};
+
+//Function Notes
 //1. Add conditional block: If the text content of the wordInProgress is the same type and value as the wordUpper param:
 //2. Add class of .win to message
 //3. Modify the innerHTML of message
@@ -134,7 +190,7 @@ const checkPlayerWin = wordUpper => {
 concealWord(word);
 
 /* Commit notes:
-- Create a Function to Show the Guessed Letters
-- Create a Function to Update the Word in Progress
-- Create a Function to Check If the Player Won
+- Declare a Global Variable for the Number of Guesses
+- Create a Function to Count Guesses Remaining
+- Add an Async Function
  */
