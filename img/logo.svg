@@ -4,16 +4,16 @@
  <defs>
   <text id="string" transform="matrix(1.0 0.0 0.0 1.0 106.0 54.0)" font-family="LuckiestGuy-Regular, Luckiest Guy" x="1.0" font-size="595.306" text-decoration="none" y="419.0">Guess</text>
  </defs>
- <use id="Guess" xlink:href="#string" fill="#ffffff" fill-opacity="1" stroke="#191919" stroke-opacity="1" stroke-linecap="round" stroke-width="12"/>
+ <use id="Guess" xlink:href="#string" fill="#ffffff" fill-opacity="1" stroke="#191919" stroke-opacity="1" stroke-linecap="round" stroke-width="5"/>
  <defs>
   <text id="string-1" transform="matrix(1.0 0.0 0.0 1.0 129.0 544.0)" y="182.0" text-decoration="none" x="1.0" font-family="LuckiestGuy-Regular, Luckiest Guy" font-size="258.897"
-  stroke="#191919" stroke-opacity="1" stroke-linecap="round" stroke-width="12" xlink:href="#stroke-path">The</text>
+  stroke="#191919" stroke-opacity="1" stroke-linecap="round" stroke-width="5" xlink:href="#stroke-path">The</text>
  </defs>
  <use id="The" xlink:href="#string-1" fill="#ffffff" fill-opacity="1" stroke="none"/>
  <defs>
   <text id="string-2" transform="matrix(1.0 0.0 0.0 1.0 618.0 544.0)" text-decoration="none" font-size="424.853" x="1.0" y="299.0" font-family="LuckiestGuy-Regular, Luckiest Guy">WORD</text>
  </defs>
- <use id="WORD" xlink:href="#string-2" fill="#ffffff" fill-opacity="1" stroke="#191919" stroke-opacity="1" stroke-linecap="round" stroke-width="12"/>
+ <use id="WORD" xlink:href="#string-2" fill="#ffffff" fill-opacity="1" stroke="#191919" stroke-opacity="1" stroke-linecap="round" stroke-width="5"/>
  <defs>
   <path id="Rectangle" d="M614 1041 L1851 1041 1851 876 614 876 Z"/>
  </defs>
@@ -21,7 +21,7 @@
  <defs>
   <path id="stroke-path" d="M1857 870 L608 870 608 1047 1857 1047 Z"/>
  </defs>
- <use id="Rectangle-2" stroke="#191919" stroke-opacity="1" stroke-linecap="round" fill="none" stroke-width="12" xlink:href="#stroke-path"/>
+ <use id="Rectangle-2" stroke="#191919" stroke-opacity="1" stroke-linecap="round" fill="none" stroke-width="5" xlink:href="#stroke-path"/>
  <defs>
   <path id="Rectangle-3" d="M219 1041 L453 1041 453 807 219 807 Z"/>
  </defs>
@@ -29,6 +29,6 @@
  <defs>
   <path id="stroke-path-1" d="M459 801 L213 801 213 1047 459 1047 Z"/>
  </defs>
- <use id="Rectangle-5" stroke="#191919" stroke-opacity="1" stroke-linecap="round" fill="none" stroke-width="12" xlink:href="#stroke-path-1"/>
+ <use id="Rectangle-5" stroke="#191919" stroke-opacity="1" stroke-linecap="round" fill="none" stroke-width="5" xlink:href="#stroke-path-1"/>
  <path id="Ellipse" d="M398 924.5 C398 889.982 370.018 862 335.5 862 300.982 862 273 889.982 273 924.5 273 959.018 300.982 987 335.5 987 370.018 987 398 959.018 398 924.5 Z" fill="#191919" fill-opacity="1" stroke="none"/>
 </svg>
