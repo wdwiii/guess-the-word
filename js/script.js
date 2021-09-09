@@ -1,5 +1,6 @@
 'use strict';
 
+let playing = true;
 const guessedLettersContainer = document.querySelector('.guessed-letters'); //guessed letters list
 const btnGuess = document.querySelector('.guess'); //'Guess!' button
 const btnPlayAgain = document.querySelector('.play-again'); // Button to restart game
@@ -131,15 +132,21 @@ const updateWord = guessedLetters => {
   const wordArray = wordUpper.split('');
   const revealWordInProgress = [];
 
-  for (let letter of wordArray) {
-    if (guessedLetters.includes(letter)) {
+  if (playing) {
+    for (let letter of wordArray) {
+      if (guessedLetters.includes(letter)) {
+        revealWordInProgress.push(letter);
+      } else {
+        revealWordInProgress.push('●');
+      }
+      wordInProgress.textContent = revealWordInProgress.join('');
+      checkPlayerWin(wordUpper);
+    }
+  } else {
+    for (let letter of wordArray) {
       revealWordInProgress.push(letter);
-    } else {
-      revealWordInProgress.push('●');
     }
   }
-  wordInProgress.textContent = revealWordInProgress.join('');
-  checkPlayerWin(wordUpper);
 };
 
 //Function Notes
@@ -161,14 +168,20 @@ const countGuesses = guess => {
     if (remainingGuessesNumber === 1) {
       guessesSpan.textContent = `1 guess`;
     } else if (remainingGuessesNumber === 0) {
+      playing = false;
       const remainingMessage = document.querySelector('.remaining');
       remainingMessage.classList.add('hide');
       startOver();
       picture.style.backgroundImage = 'url("img/not-a-winner.png")';
+      loserRevealWord(word);
     }
   } else {
     message.textContent = `The word does include the letter ${guess}`;
   }
+};
+
+const loserRevealWord = word => {
+  wordInProgress.textContent = word;
 };
 
 //Function Notes
@@ -198,6 +211,7 @@ const startOver = () => {
 };
 
 btnPlayAgain.addEventListener('click', function () {
+  playing = true;
   message.classList.remove('win');
   message.innerHTML = '';
   guessedLettersContainer.classList.remove('hide');
