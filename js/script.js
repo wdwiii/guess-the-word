@@ -171,7 +171,7 @@ const countGuesses = guess => {
       playing = false;
       const remainingMessage = document.querySelector('.remaining');
       remainingMessage.classList.add('hide');
-      startOver();
+      endGame();
       picture.style.backgroundImage = 'url("img/not-a-winner.png")';
       loserRevealWord(word);
     }
@@ -193,7 +193,7 @@ const checkPlayerWin = wordUpper => {
     message.classList.add('win');
     message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
     remainingGuesses.classList.add('hide');
-    startOver();
+    endGame();
     picture.style.backgroundImage = 'url("img/trophy.png")';
   }
 };
@@ -201,7 +201,7 @@ const checkPlayerWin = wordUpper => {
 //Function Notes
 //1. Hide the .guessed-letters ul, 'type one letter' label, input box and guess button
 //2. Display 'play again' button and picture
-const startOver = () => {
+const endGame = () => {
   guessedLettersContainer.classList.add('hide');
   letterInput.classList.add('hide');
   document.querySelector('label').classList.add('hide');
@@ -213,21 +213,75 @@ const startOver = () => {
 btnPlayAgain.addEventListener('click', function () {
   playing = true;
   message.classList.remove('win');
-  message.innerHTML = '';
+
   guessedLettersContainer.classList.remove('hide');
-  guessedLettersContainer.innerHTML = '';
   letterInput.classList.remove('hide');
   document.querySelector('label').classList.remove('hide');
   btnGuess.classList.remove('hide');
   btnPlayAgain.classList.add('hide');
   picture.classList.add('hide');
   remainingGuesses.classList.remove('hide');
+  resetGame();
+});
+
+const mainMenu = document.querySelector('.main-menu');
+const gameScreen = document.querySelector('.container');
+const settingsScreen = document.querySelector('.settings-screen');
+const btnQuickPlay = document.querySelector('.quick-play');
+const btnSettings = document.querySelector('.settings');
+const btnBack = document.querySelectorAll('.back-button');
+
+//When quick play is clicked, game starts
+btnQuickPlay.addEventListener('click', function () {
+  mainMenu.classList.add('hide');
+  mainMenu.classList.remove('flex');
+  gameScreen.classList.remove('hide');
+});
+
+btnSettings.addEventListener('click', function () {
+  mainMenu.classList.add('hide');
+  mainMenu.classList.remove('flex');
+  settingsScreen.classList.remove('hide');
+});
+
+//Function Notes
+//1. Loop through each button in the btnback object and add a click handler
+//2. Remove the 'hide' class and add 'flex' class to mainMenu
+//3. Add conditional statement:
+// If settings is showing add the hide class. Else:
+//4. Confirm that player wants to quit with overlay 'Yes or No'
+//5. Call conditional to determine next action
+//5a. If yes, call resetGame function
+//5b. If no, hide overlay
+for (let button of btnBack) {
+  button.addEventListener('click', function () {
+    mainMenu.classList.remove('hide');
+    mainMenu.classList.add('flex');
+    if (!settingsScreen.classList.contains('hide')) {
+      settingsScreen.classList.add('hide');
+    } else {
+      playing = false;
+      gameScreen.classList.add('hide');
+      resetGame();
+    }
+  });
+}
+
+//Function Notes
+//1. Empty the message text content
+//2. Empty the innerHTML of the guessed letters list
+//3. Empty the guessedLetters Array
+//4. Reset the remaing guesses number
+//5. Reset the text of the guesses span to show the correct number of guesses remaining
+//6. Run the getWord function to prepare a new game
+const resetGame = () => {
+  message.textContent = '';
+  guessedLettersContainer.innerHTML = '';
   guessedLetters = [];
   remainingGuessesNumber = 8;
   guessesSpan.textContent = `${remainingGuessesNumber} guesses`;
   getWord();
-});
-
+};
 concealWord(word);
 
 /* Commit notes:
