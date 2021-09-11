@@ -1,6 +1,6 @@
 'use strict';
 
-let playing = true;
+let playing;
 const guessedLettersContainer = document.querySelector('.guessed-letters'); //guessed letters list
 const btnGuess = document.querySelector('.guess'); //'Guess!' button
 const btnPlayAgain = document.querySelector('.play-again'); // Button to restart game
@@ -236,6 +236,7 @@ const btnNo = document.querySelector('.btn-no');
 
 //When quick play is clicked, game starts
 btnQuickPlay.addEventListener('click', function () {
+  playing = true;
   mainMenu.classList.add('hide');
   mainMenu.classList.remove('flex');
   gameScreen.classList.remove('hide');
