@@ -202,6 +202,7 @@ const checkPlayerWin = wordUpper => {
 //1. Hide the .guessed-letters ul, 'type one letter' label, input box and guess button
 //2. Display 'play again' button and picture
 const endGame = () => {
+  playing = false;
   guessedLettersContainer.classList.add('hide');
   letterInput.classList.add('hide');
   document.querySelector('label').classList.add('hide');
@@ -212,15 +213,7 @@ const endGame = () => {
 
 btnPlayAgain.addEventListener('click', function () {
   playing = true;
-  message.classList.remove('win');
 
-  guessedLettersContainer.classList.remove('hide');
-  letterInput.classList.remove('hide');
-  document.querySelector('label').classList.remove('hide');
-  btnGuess.classList.remove('hide');
-  btnPlayAgain.classList.add('hide');
-  picture.classList.add('hide');
-  remainingGuesses.classList.remove('hide');
   resetGame();
 });
 
@@ -246,6 +239,7 @@ btnSettings.addEventListener('click', function () {
   mainMenu.classList.add('hide');
   mainMenu.classList.remove('flex');
   settingsScreen.classList.remove('hide');
+  settingsScreen.classList.add('flex');
 });
 
 //Function Notes
@@ -261,8 +255,14 @@ for (let button of btnBack) {
   button.addEventListener('click', function () {
     if (!settingsScreen.classList.contains('hide')) {
       settingsScreen.classList.add('hide');
+      settingsScreen.classList.remove('flex');
       mainMenu.classList.remove('hide');
       mainMenu.classList.add('flex');
+    } else if (!gameScreen.classList.contains('hide') && playing === false) {
+      mainMenu.classList.remove('hide');
+      mainMenu.classList.add('flex');
+      gameScreen.classList.add('hide');
+      resetGame();
     } else {
       overlay.classList.remove('hide');
       overlay.classList.add('flex');
@@ -300,6 +300,15 @@ const resetGame = () => {
   guessedLetters = [];
   remainingGuessesNumber = 8;
   guessesSpan.textContent = `${remainingGuessesNumber} guesses`;
+  if (message.classList.contains('win')) message.classList.remove('win');
+
+  guessedLettersContainer.classList.remove('hide');
+  letterInput.classList.remove('hide');
+  document.querySelector('label').classList.remove('hide');
+  btnGuess.classList.remove('hide');
+  btnPlayAgain.classList.add('hide');
+  picture.classList.add('hide');
+  remainingGuesses.classList.remove('hide');
   getWord();
 };
 concealWord(word);

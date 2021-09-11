@@ -1,3 +1,7 @@
+/*====================
+        GLOBAL
+=====================*/
+
 * {
   box-sizing: border-box;
 }
@@ -29,6 +33,10 @@ body {
   color: #fff;
 }
 
+/*====================
+        LOGO
+=====================*/
+
 .logo {
   width: 55%;
   max-width: 484px;
@@ -45,6 +53,10 @@ h1 {
   text-align: center;
 }
 
+/*====================
+    GAME SCREEN
+=====================*/
+
 .container {
   display: flex;
   justify-content: flex-start;
@@ -54,8 +66,16 @@ h1 {
   height: 100%;
 }
 
+/*====================
+    UTILITY CLASSES
+=====================*/
+
 .hide {
   display: none;
+}
+
+.flex {
+  display: flex;
 }
 
 .highlight {
@@ -68,6 +88,10 @@ h1 {
   border-bottom: 2px solid #fff;
   padding-bottom: 3px;
 }
+
+/*====================
+SECERT WORD CONTAINER
+=====================*/
 
 .word-in-progress {
   letter-spacing: 1rem;
@@ -90,6 +114,10 @@ h1 {
   z-index: -1;
 }
 
+/*=========================
+GUESSED LETTERS CONTAINER
+==========================*/
+
 .guessed-letters {
   padding: 0;
   list-style: none;
@@ -100,6 +128,10 @@ h1 {
   padding: 0 0.5em;
 }
 
+/*=========================
+    USER GUESS MESSAGE
+==========================*/
+
 .message {
   text-align: center;
   color: #28bdbd;
@@ -108,6 +140,10 @@ h1 {
 .message--error {
   color: #ff8d5c;
 }
+
+/*=========================
+    USER GUESS INPUT
+==========================*/
 
 .guess-form {
   display: flex;
@@ -136,6 +172,10 @@ input:focus {
   outline: 0;
   border: 4px solid #28bdbd;
 }
+
+/*====================
+        BUTTONS
+=====================*/
 
 .guess,
 .play-again,
@@ -167,6 +207,22 @@ input:focus {
   color: white;
 }
 
+.back-button {
+  border: none;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 4rem;
+  height: 4rem;
+  background: #fff url('../img/arrow-circle-left-solid.svg');
+  border: 2px solid #ff8d5c;
+  border-radius: 50%;
+}
+
+/*====================
+  GAME OVER PICTURE
+=====================*/
+
 .picture {
   height: 300px;
   width: 300px;
@@ -184,20 +240,14 @@ input:focus {
   text-align: center;
 }
 
-.attribution a:link,
-.attribution a:visited {
-  color: #ff8d5c;
-  text-decoration: none;
-}
+/*====================
+    MAIN MENU
+=====================*/
 
 .main-menu {
   flex-direction: column;
   align-items: center;
   height: 100%;
-}
-
-.flex {
-  display: flex;
 }
 
 .main-menu .logo {
@@ -215,18 +265,21 @@ input:focus {
   background-color: #ff9d64;
 }
 
-.back-button {
-  border: none;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  width: 4rem;
-  height: 4rem;
-  background: #fff url('../img/arrow-circle-left-solid.svg');
-  border: 2px solid #ff8d5c;
-  border-radius: 50%;
+/*====================
+   SETTINGS SCREEN
+=====================*/
+.settings-screen {
+  height: 100%;
+  padding-top: 5rem;
 }
 
+.developers-note {
+  padding: 0 1rem;
+}
+
+/*====================
+  QUIT GAME OVERLAY
+=====================*/
 .overlay {
   background: rgba(0, 4, 44, 0.897);
   flex-direction: column;
@@ -252,7 +305,19 @@ input:focus {
   font-size: 1.1rem;
 }
 
-/* animatied background */
+/*====================
+        LINKS
+=====================*/
+
+.attribution-link:link,
+.attribution-link:visited {
+  color: #ff8d5c;
+  text-decoration: none;
+}
+
+/*====================
+  ANIMATED BACKGROUND
+=====================*/
 .win {
   padding: 0 1em;
   background: linear-gradient(-45deg, #ff9d64, #f5620c);
