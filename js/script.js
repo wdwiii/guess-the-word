@@ -230,6 +230,9 @@ const settingsScreen = document.querySelector('.settings-screen');
 const btnQuickPlay = document.querySelector('.quick-play');
 const btnSettings = document.querySelector('.settings');
 const btnBack = document.querySelectorAll('.back-button');
+const overlay = document.querySelector('.overlay');
+const btnYes = document.querySelector('.btn-yes');
+const btnNo = document.querySelector('.btn-no');
 
 //When quick play is clicked, game starts
 btnQuickPlay.addEventListener('click', function () {
@@ -255,17 +258,33 @@ btnSettings.addEventListener('click', function () {
 //5b. If no, hide overlay
 for (let button of btnBack) {
   button.addEventListener('click', function () {
-    mainMenu.classList.remove('hide');
-    mainMenu.classList.add('flex');
     if (!settingsScreen.classList.contains('hide')) {
       settingsScreen.classList.add('hide');
+      mainMenu.classList.remove('hide');
+      mainMenu.classList.add('flex');
     } else {
-      playing = false;
-      gameScreen.classList.add('hide');
-      resetGame();
+      overlay.classList.remove('hide');
+      overlay.classList.add('flex');
     }
   });
 }
+
+//If the yes button is clicked, hide gamescreen, show the menu and restart game
+btnYes.addEventListener('click', function () {
+  playing = false;
+  gameScreen.classList.add('hide');
+  mainMenu.classList.remove('hide');
+  mainMenu.classList.add('flex');
+  overlay.classList.remove('flex');
+  overlay.classList.add('hide');
+  resetGame();
+});
+
+//If the no button is clicked, close the overlay
+btnNo.addEventListener('click', function () {
+  overlay.classList.remove('flex');
+  overlay.classList.add('hide');
+});
 
 //Function Notes
 //1. Empty the message text content
