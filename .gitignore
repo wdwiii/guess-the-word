@@ -3,6 +3,7 @@ thumbs.db
 .vscode
 .eslintrc.json
 logo.pxd/
+.prettierrc
 
 TODO
 
