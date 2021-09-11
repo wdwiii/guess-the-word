@@ -180,7 +180,8 @@ input:focus {
 .guess,
 .play-again,
 .quick-play,
-.settings,
+.about,
+.view-on-github,
 .btn-yes,
 .btn-no {
   padding: 1em 3em;
@@ -193,6 +194,11 @@ input:focus {
   outline: none;
   border: 0;
   cursor: pointer;
+}
+
+.view-on-github:link,
+.view-on-github:visited {
+  text-decoration: none;
 }
 
 .guess:active,
@@ -266,9 +272,10 @@ input:focus {
 }
 
 /*====================
-   SETTINGS SCREEN
+   ABOUT SCREEN
 =====================*/
-.settings-screen {
+.about-screen {
+  flex-direction: column;
   height: 100%;
   padding-top: 5rem;
 }

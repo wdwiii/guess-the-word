@@ -219,9 +219,9 @@ btnPlayAgain.addEventListener('click', function () {
 
 const mainMenu = document.querySelector('.main-menu');
 const gameScreen = document.querySelector('.container');
-const settingsScreen = document.querySelector('.settings-screen');
+const aboutScreen = document.querySelector('.about-screen');
 const btnQuickPlay = document.querySelector('.quick-play');
-const btnSettings = document.querySelector('.settings');
+const btnAbout = document.querySelector('.about');
 const btnBack = document.querySelectorAll('.back-button');
 const overlay = document.querySelector('.overlay');
 const btnYes = document.querySelector('.btn-yes');
@@ -235,11 +235,11 @@ btnQuickPlay.addEventListener('click', function () {
   gameScreen.classList.remove('hide');
 });
 
-btnSettings.addEventListener('click', function () {
+btnAbout.addEventListener('click', function () {
   mainMenu.classList.add('hide');
   mainMenu.classList.remove('flex');
-  settingsScreen.classList.remove('hide');
-  settingsScreen.classList.add('flex');
+  aboutScreen.classList.remove('hide');
+  aboutScreen.classList.add('flex');
 });
 
 //Function Notes
@@ -253,9 +253,9 @@ btnSettings.addEventListener('click', function () {
 //5b. If no, hide overlay
 for (let button of btnBack) {
   button.addEventListener('click', function () {
-    if (!settingsScreen.classList.contains('hide')) {
-      settingsScreen.classList.add('hide');
-      settingsScreen.classList.remove('flex');
+    if (!aboutScreen.classList.contains('hide')) {
+      aboutScreen.classList.add('hide');
+      aboutScreen.classList.remove('flex');
       mainMenu.classList.remove('hide');
       mainMenu.classList.add('flex');
     } else if (!gameScreen.classList.contains('hide') && playing === false) {
